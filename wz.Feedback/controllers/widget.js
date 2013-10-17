@@ -39,7 +39,7 @@ function onSendFeedback(evt) {
 	}
 
 	emailDialog.setSubject("Feedback");
-	emailDialog.setToRecipients(["wgiezeman@gmail.com", "jira@wappzapp.atlassian.net"]);
+	emailDialog.setToRecipients(["YOUR_EMAIL_ADDRESSES"]); // TIP: configure a jira email address for automated JIRA ticket creation
 	emailDialog.setMessageBody($.comment.value);
 	emailDialog.addAttachment($.screenshot.toImage());
 
