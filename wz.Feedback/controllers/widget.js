@@ -50,8 +50,8 @@ function onSendFeedback(evt) {
 			closeWin();
 		} else {
 			Ti.UI.createAlertDialog({
-				title : L("Helaas"),
-				message : L("Mail is niet verstuurd"),
+				title : L("error"),
+				message : L("mail_not_sent"),
 			}).show();
 		}
 	});
