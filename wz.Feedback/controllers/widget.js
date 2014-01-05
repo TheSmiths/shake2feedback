@@ -1,4 +1,3 @@
-var W = require('WappZapp');
 var containsHintText = true;
 
 _.extend(this, {
@@ -8,8 +7,6 @@ _.extend(this, {
 		$.screenshot.image = config.media;
 		//$.screenshot.height = 600;
 		$.screenshot.width = Alloy.isTablet ? 800 : 300;
-		
-		$.win = W.openWinInNewNavWindow($.win);
 		$.win.open();
 	}
 });
