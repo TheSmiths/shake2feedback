@@ -1,66 +1,74 @@
-var containsHintText = true;
+var args = arguments[0] || {},
+	isOpen = false,
+	hintText;
 
-_.extend(this, {
-	feedback : null,
+init();
 
-	construct : function(config) {
-		$.screenshot.image = config.media;
-		//$.screenshot.height = 600;
-		$.screenshot.width = Alloy.isTablet ? 800 : 300;
-		$.win.open();
-	}
-});
+function init() {
 
-function closeWin(evt) {
-	$.win.close();
+	Ti.Gesture.addEventListener('shake', function(e) {
+
+		// Save hintText
+		hintText = $.wzFeedback_comment.value;
+
+		// Only show once
+		if (isOpen) {
+			return;
+		}
+
+		isOpen = true;
+
+		// Take screenshot
+		Titanium.Media.takeScreenshot(function(e) {
+
+			// Set values
+			$.wzFeedback_comment.value = hintText;
+			$.wzFeedback_screenshot.image = e.media;
+
+			// Open window
+			$.wzFeedback_window.open();
+		});
+	});
 }
 
-function eraseMe() {
-	$.paint.clear();
+function closeWindow(evt) {
+	$.wzFeedback_window.close();
+
+	isOpen = false;
 }
 
-/**
- * Share given video on selected network
- *
- * @param {Object} evt Event details
- * @param {String} evt.id Network to share to
- */
-function onSendFeedback(evt) {
+function sendFeedback(evt) {
 	var emailDialog = Titanium.UI.createEmailDialog();
+
+	// Not supported
 	if (!emailDialog.isSupported()) {
-		Ti.UI.createAlertDialog({
-			title : NO_MAIL_MESSAGE_TITLE,
-			message : NO_MAIL_MESSAGE
-		}).show();
+		alert(L('wzFeedback_couldNotCreateEmail', 'Could not create email'));
 		return;
 	}
 
-	emailDialog.setSubject("Feedback");
-	emailDialog.setToRecipients(["YOUR_EMAIL_ADDRESSES"]); // TIP: configure a jira email address for automated JIRA ticket creation
-	emailDialog.setMessageBody($.comment.value);
-	emailDialog.addAttachment($.screenshot.toImage());
+	emailDialog.setSubject(args.subject || L('wzFeedback_subject', 'Feedback'));
 
-	if (Ti.Platform.name == 'iPhone OS') {
+	if (args.recipients) {
+		emailDialog.setToRecipients(args.recipients);
+	}
+
+	emailDialog.setMessageBody($.wzFeedback_comment.value);
+	emailDialog.addAttachment($.wzFeedback_screenshot.toImage());
+
+	if (OS_IOS) {
 		emailDialog.setHtml(true);
-		emailDialog.setBarColor('#336699');
 	}
 
 	emailDialog.addEventListener('complete', function(e) {
 		if (e.result == emailDialog.SENT) {
-			closeWin();
-		} else {
-			Ti.UI.createAlertDialog({
-				title : L("error"),
-				message : L("mail_not_sent"),
-			}).show();
+			closeWindow();
 		}
 	});
+
 	emailDialog.open();
 }
 
-function focusComment (evt) {
-	if (containsHintText) {
-		$.comment.value = "";
-		containsHintText = false;
-	}
+function removeHintText(evt) {
+	$.wzFeedback_comment.removeEventListener('focus', removeHintText);
+	$.wzFeedback_comment.value = '';
 }

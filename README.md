@@ -1,17 +1,27 @@
-shake2feedback
-==============
+# Shake2Feedback
+An Alloy widget to supply instant easy feedback from an app, including screenshot.
 
-An Alloy widget to supply instant easy feedback from an app
+## Install
 
+1. Use [gitTio](http://gitt.io/component/wz.Feedback): `gittio install wz.Feedback` or download the repo as zip etc.
+2. Also install ti.pain (`gittio install ti.paint`)
+3. In your `alloy.js` add:
 
-Usage:
-
-Ti.Gesture.addEventListener('shake', function(e) {
-  Ti.API.info('Shake it like a polaroid picture!');
-  Titanium.Media.takeScreenshot(function(event) {
-      //event.media;
-      Alloy.createController('Feedback', {
-        media : event.media
-      });
-  });
+```
+Alloy.createWidget('wz.Feedback', {
+	recipients: ['support@company.com', 'ticket@jra.company.com']
 });
+```
+
+## Use
+Shake, then feedback :)
+
+## Customize
+Use the `wzFeedback_` keys to translate texts.
+
+Use the `wzFeedback_` ID's (not classes) to overide the styles.
+
+## License
+Copyright WappZapp TV
+
+MIT License
