@@ -1,17 +1,10 @@
 <Alloy>
-	<Window id="win">
-		<LeftNavButton platform="ios">
-			<Button id="done" onClick="closeWin" />
-		</LeftNavButton>
-		<RightNavButton platform="ios">
-			<Button id="send" onClick="onSendFeedback" />
-		</RightNavButton>
-		
-		<ImageView id='screenshot'>
-			<Module id="paint" module="ti.paint" method="createPaintView"
-			eraseMode="false" strokeWidth="5.0" strokeColor="blue" strokeAlpha="255" />
+	<Window id="wzFeedback_window" class="wzFeedback_window">
+		<Button id="wzFeedback_cancel" class="wzFeedback_cancel" onClick="closeWindow" />
+		<Button id="wzFeedback_send" class="wzFeedback_send" onClick="sendFeedback" />
+		<TextArea id="wzFeedback_comment" class="wzFeedback_comment" onFocus="removeHintText"></TextArea>
+		<ImageView id="wzFeedback_screenshot" class="wzFeedback_screenshot">
+			<PaintView id="wzFeedback_paint" class="wzFeedback_paint" module="ti.paint" />
 		</ImageView>
-		<TextArea id='comment' onFocus="focusComment"></TextArea>
-		<Button id="sendButton" onClick="onSendFeedback"></Button>
 	</Window>
 </Alloy>

@@ -1,51 +1,79 @@
-"Window": {
-	title: L('Feedback'),
-	backgroundColor: "#CCC"
-}
+".wzFeedback_window": {
+	backgroundColor: "#CCC",
 
-"Window[platform=ios]": {
 	modal: true,
-	navBarHidden: false,
-	navGroup: false,
-	backgroundColor: "#CCC"
 
+	/* not available on iOS7, hide on iOS6 */
+	navBarHidden: true
 }
 
-"#done": {
-	title: L('Niet versturen')
-}
+".wzFeedback_cancel": {
+	top: '5dp',
+	height: '30dp',
+	left: '5dp',
 
-"#send": {
-	title: L('Verstuur')
-}
-
-"#screenshot" : {
-	top:100
-	//height:'75%',
-	
-	//height: 400
-	//width:100
-}
-
-"#comment" : {
-	top: 5,
-	width: 800,
-	height: 90,
+	backgroundColor: "#333",
+	color: "#FFF",
 	font: {
-		fontFamily: 'OpenSans',
-		fontSize: 17
+		fontSize: '14dp'
 	},
-	textAlign: "left",
-	value: "Schrijf hier je feedback en teken op de screenshot...",
+
+	title: L('wzFeedback_cancel', ' Cancel ')
+}
+
+".wzFeedback_cancel[platform=ios]": {
+	style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+}
+
+".wzFeedback_send": {
+	top: '5dp',
+	right: '5dp',
+	height: '30dp',
+
+	backgroundColor: "#333",
+	color: "#FFF",
+	font: {
+		fontSize: '14dp'
+	},
+
+	title: L('wzFeedback_send', ' Send ')
+}
+
+".wzFeedback_send[platform=ios]": {
+	style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+}
+
+".wzFeedback_comment" : {
+	top: '40dp',
+	right: '5dp',
+	height: '90dp',
+	left: '5dp',
+
+	value: L('wzFeedback', 'Draw on the screenshot and write your feedback here.'),
+
+	color: "#333",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	fontFamily: {
+		fontSize: '14dp'
+	},
 	backgroundColor: "#FFF"
 }
 
-"#comment[formFactor=handheld]" : {
-	width: 310
+".wzFeedback_screenshot" : {
+	top: '135dp',
+	right: '5dp',
+	bottom: '5dp',
+	left: '5dp'
 }
 
-"#paint" : {
+".wzFeedback_paint" : {
 	width: Ti.UI.FILL,
 	height: Ti.UI.FILL,
-	backgroundColor: "transparent"
+
+	backgroundColor: "transparent",
+
+	eraseMode: false,
+	strokeWidth: 5.0,
+	strokeColor: 'blue',
+	strokeAlpha: 255
 }
