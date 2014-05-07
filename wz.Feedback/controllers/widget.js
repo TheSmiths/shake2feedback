@@ -53,7 +53,7 @@ function sendFeedback(evt) {
 	}
 
 	emailDialog.setMessageBody($.wzFeedback_comment.value);
-	emailDialog.addAttachment($.wzFeedback_screenshot.toImage());
+	emailDialog.addAttachment($.wzFeedback_screenshot.image);
 
 	if (OS_IOS) {
 		emailDialog.setHtml(true);
