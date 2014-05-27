@@ -61,7 +61,11 @@ function sendFeedback(evt) {
 
 	emailDialog.addEventListener('complete', function(e) {
 		if (e.result == emailDialog.SENT) {
-			closeWindow();
+			if (OS_IOS) {
+				setTimeout(function(){closeWindow();},750);
+			}else{
+				closeWindow();
+			}
 		}
 	});
 
